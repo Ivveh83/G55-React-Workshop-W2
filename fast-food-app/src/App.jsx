@@ -41,6 +41,7 @@ function App() {
 
   // Function to add item to the order
   const addItemToOrder = (itemToAdd) => {
+    // Use the callback form of setItems to ensure we always work with the latest state
     setItems((prevItems) => {
       // Check if item already exists in order
       const existingItem = prevItems.find((i) => i.id === itemToAdd.id);

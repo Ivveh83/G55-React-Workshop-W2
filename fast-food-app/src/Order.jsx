@@ -1,4 +1,6 @@
 const Order = ({ items, setItems }) => {
+  // Function to update item quantity
+  // This function will be used to increase or decrease the quantity of an item in the order
   const updateQuantity = (id, change) => {
     setItems((prevItems) => {
       const updatedItems = prevItems
@@ -17,59 +19,48 @@ const Order = ({ items, setItems }) => {
       <h4>Your order</h4>
       <div className="border p-3">
         <h5 className="mb-3">Order Details</h5>
-        <div className="row">
-          {/* Order details */}
-          <div className="col-md-4">
-            {items
-              ?.filter((item) => item.quantity > 0)
-              .map((item) => (
-                <p key={item.id}>
-                  {item.quantity} x {item.name}
-                </p>
-              ))}
-          </div>
+        {items.map((item) => (
+          <div className="row" key={item.id}>
+            {/* Order details */}
+            <div className="col-md-4">
+              <p>
+                {item.quantity} x {item.name}
+              </p>
+            </div>
 
-          {/* Quantity controls */}
-          <div className="col-md-4 d-flex flex-column align-items-center">
-            {items
-              ?.filter((item) => item.quantity > 0)
-              .map((item) => (
-                <div key={item.id} className="d-flex mb-2">
-                  <button
-                    className="btn btn-outline-secondary btn-sm me-2"
-                    onClick={() => updateQuantity(item.id, -1)}
-                  >
-                    -
-                  </button>
-                  <button
-                    className="btn btn-outline-secondary btn-sm"
-                    onClick={() => updateQuantity(item.id, +1)}
-                  >
-                    +
-                  </button>
-                </div>
-              ))}
-          </div>
+            {/* Quantity controls */}
+            <div className="col-md-4 d-flex flex-column align-items-center">
+              <div className="d-flex">
+                <button
+                  className="btn btn-outline-secondary btn-sm border-2 me-2"
+                  onClick={() => updateQuantity(item.id, -1)}
+                >
+                  -
+                </button>
+                <button
+                  className="btn btn-outline-secondary btn-sm border-2"
+                  onClick={() => updateQuantity(item.id, +1)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
 
-          {/* Prices */}
-          <div className="col-md-4 text-end">
-            {items
-              ?.filter((item) => item.quantity > 0)
-              .map((item) => (
-                <p key={item.id}>{item.price * item.quantity} SEK</p>
-              ))}
-            <hr />
-            <p className="fw-bold">
-              Total:{" "}
-              {items
-                ?.filter((item) => item.quantity > 0)
-                .reduce(
-                  (acc, item) => acc + item.price * item.quantity,
-                  0
-                )}{" "}
-              SEK
-            </p>
+            {/* Prices */}
+            <div className="col-md-4 text-end">
+              <p>{item.price * item.quantity} SEK</p>
+            </div>
           </div>
+        ))}
+
+        <hr className="w-50 ms-auto" />
+        {/* Total price */}
+        <div className="text-end">
+          <p className="fw-bold">
+            Total:{" "}
+            {items.reduce((acc, item) => acc + item.price * item.quantity, 0)}{" "}
+            SEK
+          </p>
         </div>
       </div>
     </div>
