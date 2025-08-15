@@ -34,37 +34,43 @@ function App() {
 
   const [darkMode, setDarkMode] = useState(false);
 
-  const toggleDarkMode = () => {
-    if (darkMode) setDarkMode(false);
-    else setDarkMode(true);
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+
+  // Start with an empty order
+  const [items, setItems] = useState([]);
+
+  // Function to add item to the order
+  const addItemToOrder = (itemToAdd) => {
+    setItems((prevItems) => {
+      // Check if item already exists in order
+      const existingItem = prevItems.find((i) => i.id === itemToAdd.id);
+      if (existingItem) {
+        // Increase quantity
+        return prevItems.map((i) =>
+          i.id === itemToAdd.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
+      } else {
+        // Add new item with quantity 1
+        // Destructure itemToAdd to get id, name, price
+        const { id, name, price } = itemToAdd;
+        // Ensure the new item has a quantity property
+        return [...prevItems, { id, name, price, quantity: 1 }];
+      }
+    });
   };
 
-  const [items, setItems] = useState(
-    menuItems.map((item) => ({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      quantity: item.quantity || 1, // Ensure quantity is initialized
-    }))
-  );
-
   return (
-    <>
-      <div
-        className={
-          darkMode
-            ? "bg-dark text-white min-vh-100"
-            : "bg-light text-dark min-vh-100"
-        }
-      >
-        {/*Toggle Button Dark/Light Mode*/}
-        <ToggleButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        {/*Menu*/}
-        <Menu menuItems={menuItems} />
-        {/*The Order*/}
-        <Order items={items} setItems={setItems} />
-      </div>
-    </>
+    <div
+      className={
+        darkMode
+          ? "bg-dark text-white min-vh-100"
+          : "bg-light text-dark min-vh-100"
+      }
+    >
+      <ToggleButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <Menu menuItems={menuItems} addItemToOrder={addItemToOrder} />
+      <Order items={items} setItems={setItems} />
+    </div>
   );
 }
 

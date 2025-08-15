@@ -1,6 +1,4 @@
-const Menu = ({menuItems}) => {
-
-
+const Menu = ({ menuItems, addItemToOrder }) => {
   return (
     <>
       <div className="container">
@@ -19,7 +17,12 @@ const Menu = ({menuItems}) => {
                   <h5 className="card-title">{item.name}</h5>
                   <p className="card-text">{item.description}</p>
                   <p className="fw-bold">SEK {item.price}</p>
-                  <button className="btn btn-primary">Add to order</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => addItemToOrder(item)}
+                  >
+                    Add to order
+                  </button>
                 </div>
               </div>
             </div>

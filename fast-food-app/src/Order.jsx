@@ -1,15 +1,15 @@
 const Order = ({ items, setItems }) => {
   const updateQuantity = (id, change) => {
-    setItems(
-      (items) =>
-        items
-          .map((item) =>
-            item.id === id
-              ? { ...item, quantity: item.quantity + change }
-              : item
-          )
-          .filter((item) => item.quantity > 0) // tar bort item om quantity är 0 eller lägre
-    );
+    setItems((prevItems) => {
+      const updatedItems = prevItems
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + change } : item
+        )
+        .filter((item) => item.quantity > 0); // Remove items with quantity 0
+
+      console.log("Updated items:", updatedItems);
+      return updatedItems;
+    });
   };
 
   return (
