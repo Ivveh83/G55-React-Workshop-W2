@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ToggleButton from "./ToggleButton.jsx";
 import Menu from "./Menu.jsx";
 import Order from "./Order.jsx";
+import "./App.css";
 
 function App() {
   const menuItems = [
@@ -30,19 +31,47 @@ function App() {
       image:
         "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
+    {
+      id: 4,
+      name: "Soda",
+      description: "Refreshing soda to quench your thirst.",
+      price: 29,
+      image:
+        "https://images.unsplash.com/photo-1582572430474-3acf30221916?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      id: 5,
+      name: "Salad",
+      description: "Fresh garden salad with a variety of vegetables.",
+      price: 89,
+      image:
+        "https://images.unsplash.com/photo-1678831654337-79f072c7dd9f?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      id: 6,
+      name: "Ice Cream",
+      description: "Creamy ice cream in various flavors.",
+      price: 49,
+      image:
+        "https://images.unsplash.com/photo-1586917049334-0f99406d8a6e?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
   ];
+
+  // State to manage dark mode
+  // Initialize darkMode state to false
 
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   // Start with an empty order
-  const [items, setItems] = useState([]);
+  const [orderItems, setOrderItems] = useState([]);
 
   // Function to add item to the order
   const addItemToOrder = (itemToAdd) => {
-    // Use the callback form of setItems to ensure we always work with the latest state
-    setItems((prevItems) => {
+    // Using the callback form of setter method to ensure we always work with the latest state, for use of "best practice" and to prevent wrong value
+    //  if multiple updates take place after each other. Setter methods are asynchronous.
+    setOrderItems((prevItems) => {
       // Check if item already exists in order
       const existingItem = prevItems.find((i) => i.id === itemToAdd.id);
       if (existingItem) {
@@ -70,7 +99,7 @@ function App() {
     >
       <ToggleButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <Menu menuItems={menuItems} addItemToOrder={addItemToOrder} />
-      <Order items={items} setItems={setItems} />
+      <Order items={orderItems} setItems={setOrderItems} />
     </div>
   );
 }

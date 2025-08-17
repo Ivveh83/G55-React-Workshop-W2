@@ -13,7 +13,7 @@ const Menu = ({ menuItems, addItemToOrder }) => {
                   alt={item.name}
                   className="card-img-top"
                 />
-                <div className="card-body text-center">
+                <div id="card-body" className="card-body text-center">
                   <h5 className="card-title">{item.name}</h5>
                   <p className="card-text">{item.description}</p>
                   <p className="fw-bold">SEK {item.price}</p>

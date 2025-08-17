@@ -53,12 +53,13 @@ const Order = ({ items, setItems }) => {
           </div>
         ))}
 
-        <hr className="w-50 ms-auto" />
+        <hr className="w-25 ms-auto" />
         {/* Total price */}
         <div className="text-end">
           <p className="fw-bold">
             Total:{" "}
-            {items.reduce((acc, item) => acc + item.price * item.quantity, 0)}{" "}
+            {/*Accumulator (acc) starts at 0 and adds the total price for each item in the array "items"*/}
+            {items.reduce((acc, item) => acc + item.price * item.quantity, 0)}{" "} 
             SEK
           </p>
         </div>
