@@ -91,20 +91,23 @@ function App() {
   };
   // Function to check if two items are equal, including adjustments
   // This function is used to compare items in the order to prevent duplicates
-function areItemsEqual(a, b) {
-  if (a.id !== b.id) return false;
+  function areItemsEqual(a, b) {
+    if (a.id !== b.id) return false;
 
-  if (!a.adjustments && !b.adjustments) return true;
-  if (!a.adjustments || !b.adjustments) return false;
+    if (!a.adjustments && !b.adjustments) return true;
+    if (!a.adjustments || !b.adjustments) return false;
 
-  // Sort adjustments by stringified JSON to ensure consistent comparison
-  // This is necessary because the order of adjustments may vary
-  const aSorted = [...a.adjustments].sort((x,y) => JSON.stringify(x).localeCompare(JSON.stringify(y)));
-  const bSorted = [...b.adjustments].sort((x,y) => JSON.stringify(x).localeCompare(JSON.stringify(y)));
+    // Sort adjustments by stringified JSON to ensure consistent comparison
+    // This is necessary because the order of adjustments may vary
+    const aSorted = [...a.adjustments].sort((x, y) =>
+      JSON.stringify(x).localeCompare(JSON.stringify(y))
+    );
+    const bSorted = [...b.adjustments].sort((x, y) =>
+      JSON.stringify(x).localeCompare(JSON.stringify(y))
+    );
 
-  return isEqual(aSorted, bSorted);
-}
-
+    return isEqual(aSorted, bSorted);
+  }
 
   return (
     <div

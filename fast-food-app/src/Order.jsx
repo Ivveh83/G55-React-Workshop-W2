@@ -24,7 +24,16 @@ const Order = ({ items, setItems }) => {
             {/* Order details */}
             <div className="col-md-4">
               <p>
-                {item.quantity} x {item.name}
+                {item.quantity} x {item.name}, {item.adjustments?.length > 0 && (
+                  <span>
+                    Adjustments:{" "}
+                    {item.adjustments.map((adj) => (
+                      <span key={adj.id}>
+                        {adj.ingredient} (+{adj.price} SEK)
+                      </span>
+                    ))}
+                    </span>
+                    )}
               </p>
             </div>
 

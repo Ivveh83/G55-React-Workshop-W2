@@ -1,9 +1,9 @@
 #Todo's:
 ##TODO 1:
 Add button for adding toppings to items named "Adjustments To Order"
-1. Button should call alert().
-2. In alert-window toppings can be added to or deducted from the order.
-3. After pressing a button, "Add To Order", in the alert-window, the toppings that are added or deducted from item will be added to the item price 
+1. Button should call a modal.
+2. In modal-window toppings can be added to or deducted from the order.
+3. After pressing a button, "Add To Order", in the modal-window, the toppings that are added or deducted from item will be added to the item price 
 
 ###Practical arrangements:
 Create an array of objects with various toppings and the respective price to select from
